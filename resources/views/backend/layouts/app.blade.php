@@ -26,6 +26,8 @@
   <link rel="stylesheet" href="{{ asset('/') }}back/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('/') }}back/plugins/summernote/summernote-bs4.min.css">
+
+  @yield('extra-css')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -90,5 +92,7 @@
 <script src="{{ asset('/') }}back/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('/') }}back/dist/js/demo.js"></script>
+
+@yield('extra-js')
 </body>
 </html>

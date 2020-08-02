@@ -19,4 +19,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => 'auth', 'namespace' => 'Backend'], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::resource('products', 'ProductController');
+    
+});
