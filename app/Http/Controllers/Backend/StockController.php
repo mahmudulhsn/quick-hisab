@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Requests\StockRequest;
+use App\Http\Controllers\Controller;
+use App\Models\Stock;
 
 class StockController extends Controller
 {
@@ -24,7 +28,8 @@ class StockController extends Controller
      */
     public function create()
     {
-        //
+        $products = Product::all();
+        return view('backend.products.stocks', compact('products'));
     }
 
     /**
@@ -33,9 +38,23 @@ class StockController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StockRequest $request)
     {
-        //
+        $product = Product::findOrFail($request->product_id);
+        $stock = Stock::where('product_id', $request->product_id)->latest()->first();
+        // return (($stock->unit_price * $stock->current_stock) + $request->total_amount) / ($stock->current_stock + $request->quantity);
+        $product->stocks()->create([
+            'type' => 'in',
+            'quantity' => $request->quantity,
+            'current_stock' => $stock->current_stock + $request->quantity,
+            'total_amount' => $request->total_amount,
+            'unit_price' => (($stock->unit_price * $stock->current_stock) + $request->total_amount) / ($stock->current_stock + $request->quantity),
+            'date_time' => Carbon::parse($request->date_time)->format('Y-m-d H:i:s')
+
+        ]);
+        session()->flash('type', 'success');
+        session()->flash('message', 'Stock has been updated successfully.');
+        return redirect()->route('products.index');
     }
 
     /**

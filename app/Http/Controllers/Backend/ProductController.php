@@ -20,7 +20,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::with(['stocks' => function($query) {
-                                    $query->latest()->first();
+                                    $query->latest()->get();
                                 }])
                                 ->latest()->get();
         return view('backend.products.index', compact('products'));

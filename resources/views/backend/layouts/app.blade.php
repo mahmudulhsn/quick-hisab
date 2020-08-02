@@ -18,6 +18,9 @@
   <link rel="stylesheet" href="{{ asset('/') }}back/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- JQVMap -->
   <link rel="stylesheet" href="{{ asset('/') }}back/plugins/jqvmap/jqvmap.min.css">
+
+  @yield('extra-css')
+  
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('/') }}back/dist/css/adminlte.min.css">
   <!-- overlayScrollbars -->
@@ -27,7 +30,7 @@
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('/') }}back/plugins/summernote/summernote-bs4.min.css">
 
-  @yield('extra-css')
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
