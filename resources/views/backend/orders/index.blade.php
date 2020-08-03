@@ -109,10 +109,7 @@
                     @php
                         $bracket = ["[", "]", ]
                     @endphp
-                    {{-- <td>{{ json_encode($prod) }}</td> --}}
                     <td>{{ str_replace($bracket, "", json_encode($prod)) }}</td>
-                    {{-- <td>{{ $order->product['product_id'][0] }}</td> --}}
-                    {{-- <td>{{ json_encode($order->product['product_id'][0]) }}</td> --}}
                     <td>{{ Carbon\Carbon::parse($order->date_time)->format('d M, Y')  }}</td>
                     <td>
                       <a href="{{ route('orders.edit', $order->id) }}" style="padding: 0 15px 0 15px">
