@@ -42,7 +42,6 @@ class StockController extends Controller
     {
         $product = Product::findOrFail($request->product_id);
         $stock = Stock::where('product_id', $request->product_id)->latest()->first();
-        // return (($stock->unit_price * $stock->current_stock) + $request->total_amount) / ($stock->current_stock + $request->quantity);
         $product->stocks()->create([
             'type' => 'in',
             'quantity' => $request->quantity,
