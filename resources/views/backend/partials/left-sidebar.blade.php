@@ -87,6 +87,30 @@
             </ul>
           </li>
 
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Expense
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('expenses.create') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Expense</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('expenses.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Expenses</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
           <li class="nav-item">
             <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
                                                                       document.getElementById('logout-form').submit();">

@@ -24,5 +24,6 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Backend'], function () {
     Route::resource('products', 'ProductController');
     Route::resource('stocks', 'StockController');
     Route::resource('orders', 'OrderController');
+    Route::resource('expenses', 'ExpenseController');
     
 });

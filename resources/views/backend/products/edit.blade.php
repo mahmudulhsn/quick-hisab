@@ -35,7 +35,7 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                    <h3 class="card-title">Create a Product</h3>
+                    <h3 class="card-title">Edit Product</h3>
                     <a href="{{ route('products.index') }}" class="btn btn-success float-right btn-sm">Product List</a>
               </div>
               <!-- /.card-header -->
