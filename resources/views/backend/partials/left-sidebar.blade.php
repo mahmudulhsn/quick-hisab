@@ -35,7 +35,7 @@
          
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
+              <i class="nav-icon fa fa-product-hunt"></i>
               <p>
                 Product Management
                 <i class="right fas fa-angle-left"></i>
@@ -45,7 +45,7 @@
               <li class="nav-item">
                 <a href="{{ route('products.create') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Add Products</p>
+                  <p>Add Product</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -65,7 +65,7 @@
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
+              <i class="nav-icon fa fa-first-order"></i>
               <p>
                 Order Management
                 <i class="right fas fa-angle-left"></i>

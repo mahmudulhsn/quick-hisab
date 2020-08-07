@@ -17,13 +17,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        $thisMonthStart = Carbon::now()->startOfMonth()->toDateString();
-        $today = Carbon::now()->addDay(1)->toDateString();
-        $investByProduct = Stock::where('type', 'in')->whereBetween('date_time', [$thisMonthStart, $today])->sum('total_amount');
-        $totalSale = Order::whereBetween('date_time', [$thisMonthStart, $today])->sum('total_amount');
-        $expense = Expense::whereBetween('date_time', [$thisMonthStart, $today])->sum('amount');
+        $data = explode(" - ",$request->date);
+
+        $from = ($request->has('date')) ? Carbon::parse($data[0]) : Carbon::now()->startOfMonth()->toDateString();
+        $to =($request->has('date')) ? Carbon::parse($data[1]) :  Carbon::now()->addDay(1)->toDateString();
+        $investByProduct = Stock::where('type', 'in')->whereBetween('date_time', [$from, $to])->sum('total_amount');
+        $totalSale = Order::whereBetween('date_time', [$from, $to])->sum('total_amount');
+        $expense = Expense::whereBetween('date_time', [$from, $to])->sum('amount');
         return view('backend.index', compact('investByProduct', 'totalSale', 'expense'));
     }
 }

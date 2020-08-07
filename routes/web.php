@@ -20,7 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => 'auth', 'namespace' => 'Backend'], function () {
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/home/{from?}/{to?}', 'HomeController@index')->name('home');
     Route::resource('products', 'ProductController');
     Route::resource('stocks', 'StockController');
     Route::resource('orders', 'OrderController');

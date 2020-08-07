@@ -4,6 +4,29 @@
     Quick Mart BD | Dashboard
 @endsection
 
+@section('extra-css')
+      <!-- Select2 -->
+      <link rel="stylesheet" href="{{ asset('/') }}back/plugins/select2/css/select2.min.css">
+      <link rel="stylesheet" href="{{ asset('/') }}back/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+@endsection
+
+@section('extra-js')
+<!-- Select2 -->
+<script src="{{ asset('/') }}back/plugins/select2/js/select2.full.min.js"></script>
+<script type="text/javascript">
+  //Date range picker
+  $('#reservation').daterangepicker()
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({
+      timePicker: true,
+      timePickerIncrement: 30,
+      locale: {
+        format: 'MM/DD/YYYY hh:mm A'
+      }
+    })
+</script>
+@endsection
+
 @section('main-content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -28,9 +51,36 @@
     <section class="content">
       <div class="container-fluid">
         <h4 class="text-center">Analytics for <span class="text text-danger">{{ \Carbon\Carbon::today()->format('F') }}</span></h4>
+        <div class="row justify-content-md-center">
+          <div class="col-md-6">
+            <form action="{{ route('home') }}" method="get">
+              @csrf
+              <div class="row ">
+                <div class="col-md-12">
+                  <h4 class="text-center"></h4>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="far fa-calendar-alt"></i>
+                        </span>
+                      </div>
+                      <input type="text" class="form-control float-right" id="reservation" name="date">
+                    </div>
+                    <!-- /.input group -->
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <button type="submit" class="btn btn-primary">search</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
         <!-- Small boxes (Stat box) -->
         <div class="row">
-          
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box {{(($totalSale - $investByProduct - $expense) >= 0) ? 'bg-success' : 'bg-danger'  }}">
