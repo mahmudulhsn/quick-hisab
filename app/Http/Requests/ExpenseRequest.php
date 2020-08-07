@@ -25,7 +25,7 @@ class ExpenseRequest extends FormRequest
     {
         return [
             'amount' => 'required|numeric',
-            'purpose' => 'required',
+            'expense_type' => 'required',
             'expense_by' => 'required',
             'date_time' => 'required'
         ];

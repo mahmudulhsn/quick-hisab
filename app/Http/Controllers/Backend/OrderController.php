@@ -125,6 +125,11 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $order = Order::find($id);
+        $order->delete();
+
+        session()->flash('type', 'success');
+        session()->flash('message', 'Order has been deleted successfully.');
+        return redirect()->route('orders.index');
     }
 }

@@ -46,19 +46,17 @@
     $('#datetimepicker7').datetimepicker();
   });
 </script>
-  <script type="text/javascript">
+  {{-- <script type="text/javascript">
     $(function () {
         $('#datetimepicker7').datetimepicker();
     });
-  </script>
+  </script> --}}
 
 <script type="text/javascript">
   $(document).ready(function(){
       var maxField = 20; //Input fields increment limitation
       var addButton = $('.add_button'); //Add button selector
       var wrapper = $('.field_wrapper'); //Input field wrapper
-      // var fieldHTML = '<div><input type="text" name="field_name[]" value=""/><a href="javascript:void(0);" class="remove_button"><img src="remove-icon.png"/></a></div>'; //New input field html 
-
 
       var fieldHTML = '<tr><td><select class="form-control select2" style="width: 100%;" name="product[product_id][]" required> @foreach ($products as $product) <option value="{{ $product->id }}">{{ $product->name }}</option>@endforeach </select></td><td><input type="text" class="form-control" placeholder="Quantity" name="product[qty][]" required></td><td><input type="text" class="form-control" placeholder="Total Amount"  name="product[total][]" required></td><td> <a href="javascript:void(0);" class="remove_button" title="Add field"><i class="fa fa-minus-circle" aria-hidden="true" style="font-size: 30px; color: red;"></i></a></td></tr>'; //New input field html 
       var x = 1; //Initial field counter is 1

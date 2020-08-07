@@ -1,13 +1,29 @@
 @extends('backend.layouts.app')
 
 @section('title')
-    Quick Mart BD | Edit Expense
+    Quick Mart BD | Edit E\xpense
+@endsection
+
+
+@section('extra-css')
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('/') }}back/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="{{ asset('/') }}back/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 @endsection
 
 @section('extra-js')
+<script src="{{ asset('/') }}back/plugins/select2/js/select2.full.min.js"></script>
 <script type="text/javascript">
   $(function () {
-      $('#datetimepicker7').datetimepicker();
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+    $('#datetimepicker7').datetimepicker();
   });
 </script>
 @endsection
@@ -55,10 +71,32 @@
                     <small class="help-block text text-danger" data-bv-validator="notEmpty" data-bv-for="txtName" data-bv-result="INVALID" style="">{{ $errors->has('amount') ? $errors->first('amount') : '' }}</small>
                   </div>
                   <div class="form-group">
+                    <label for="purpose">Select Expense Type</label>
+                    <select class="form-control select2" style="width: 100%;" name="expense_type" required disabled>
+                      <option value="other" {{ ($expense->expense_type == 'other') ? 'selected' : ''}}>Others</option>
+                      <option value="boost" {{ ($expense->expense_type == 'boost') ? 'selected' : ''}}>By Boost</option>
+                    </select>
+                  </div>
+                  @if (!empty($expense->purpose))
+                  <div class="form-group">
                     <label for="purpose">Purpose</label>
                     <input type="text" class="form-control {{ $errors->has('purpose') ? 'border border-danger' : '' }}" id="purpose" placeholder="Purpose" name="purpose"  value="{{ $expense->purpose }}">
                     <small class="help-block text text-danger" data-bv-validator="notEmpty" data-bv-for="txtName" data-bv-result="INVALID" style="">{{ $errors->has('purpose') ? $errors->first('purpose') : '' }}</small>
                   </div>
+                  @endif
+                  @if (!empty($expense->product_id))
+                  <div class="form-group product purpose">
+                    <label for="productnName">Select a Product</label>
+                    <select class="form-control select2" style="width: 100%;" name="product_id[]" multiple="multiple">
+                      @foreach ($expense->product_id as $key => $item)
+                        @foreach ($products as $product)
+                        <option value="{{ $product->id }}" {{ ($product->id == $item) ? 'selected' : ''}}>{{ $product->name }}</option>
+                        @endforeach
+                      @endforeach
+                    </select>
+                    <small class="help-block text text-danger" data-bv-validator="notEmpty" data-bv-for="txtName" data-bv-result="INVALID" style="">{{ $errors->has('product_id') ? $errors->first('product_id') : '' }}</small>
+                  </div>
+                  @endif
                   <div class="form-group">
                     <label for="expenseBy">Expense By</label>
                     <input type="text" class="form-control {{ $errors->has('expense_by') ? 'border border-danger' : '' }}" id="expenseBy" placeholder="Expense By" name="expense_by"  value="{{ $expense->expense_by }}" >

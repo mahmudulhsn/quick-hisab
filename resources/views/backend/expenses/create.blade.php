@@ -4,10 +4,51 @@
     Quick Mart BD | Add new Expense
 @endsection
 
+@section('extra-css')
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('/') }}back/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="{{ asset('/') }}back/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
+    <style>
+      input[type=button] {
+          width: 75px;
+      }
+      form {
+          padding: .5em;
+          margin: .5em;
+          border: 1px dashed #ccc;
+      }
+    </style>
+@endsection
+
 @section('extra-js')
+<script src="{{ asset('/') }}back/plugins/select2/js/select2.full.min.js"></script>
 <script type="text/javascript">
   $(function () {
-      $('#datetimepicker7').datetimepicker();
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+    $('#datetimepicker7').datetimepicker();
+  });
+
+  $("select").change(function () {
+      // hide all optional elements
+      $('.purpose').css('display','none');
+
+      $("select option:selected").each(function () {
+          if($(this).val() == "boost") {
+              $('.product').css('display','block');
+              $('.other').css('display','none');
+          } else if($(this).val() == "other") {
+              $('.other').css('display','block');
+              $('.product').css('display','none');
+          }
+      });
   });
 </script>
 @endsection
@@ -53,11 +94,31 @@
                     <input type="text" class="form-control {{ $errors->has('amount') ? 'border border-danger' : '' }}" id="amount" placeholder="Amount" name="amount" value="{{ old('amount')}}">
                     <small class="help-block text text-danger" data-bv-validator="notEmpty" data-bv-for="txtName" data-bv-result="INVALID" style="">{{ $errors->has('amount') ? $errors->first('amount') : '' }}</small>
                   </div>
+
                   <div class="form-group">
+                    <label for="purpose">Select Expense Type</label>
+                    <select class="form-control select2" style="width: 100%;" name="expense_type" required>
+                      <option value="other">Others</option>
+                      <option value="boost">By Boost</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group product purpose" style="display: none;">
+                    <label for="productnName">Select a Product</label>
+                    <select class="form-control select2" style="width: 100%;" name="product_id[]" multiple="multiple">
+                      @foreach ($products as $product)
+                      <option value="{{ $product->id }}">{{ $product->name }}</option>
+                      @endforeach
+                    </select>
+                    <small class="help-block text text-danger" data-bv-validator="notEmpty" data-bv-for="txtName" data-bv-result="INVALID" style="">{{ $errors->has('product_id') ? $errors->first('product_id') : '' }}</small>
+                  </div>
+
+                  <div class="form-group other purpose">
                     <label for="purpose">Purpose</label>
                     <input type="text" class="form-control {{ $errors->has('purpose') ? 'border border-danger' : '' }}" id="purpose" placeholder="Purpose" name="purpose"  value="{{ old('purpose')}}">
                     <small class="help-block text text-danger" data-bv-validator="notEmpty" data-bv-for="txtName" data-bv-result="INVALID" style="">{{ $errors->has('purpose') ? $errors->first('purpose') : '' }}</small>
                   </div>
+
                   <div class="form-group">
                     <label for="expenseBy">Expense By</label>
                     <input type="text" class="form-control {{ $errors->has('expense_by') ? 'border border-danger' : '' }}" id="expenseBy" placeholder="Expense By" name="expense_by"  value="{{ old('expense_by')}}" >

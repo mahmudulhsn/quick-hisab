@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use Carbon\Carbon;
 use App\Models\Expense;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ExpenseRequest;
@@ -28,7 +29,8 @@ class ExpenseController extends Controller
      */
     public function create()
     {
-        return view('backend.expenses.create');
+        $products = Product::all();
+        return view('backend.expenses.create', compact('products'));
     }
 
     /**
@@ -39,12 +41,25 @@ class ExpenseController extends Controller
      */
     public function store(ExpenseRequest $request)
     {
-        $expense = Expense::create([
-            'amount' => $request->amount,
-            'purpose' => $request->purpose,
-            'expense_by' => $request->expense_by,
-            'date_time' => Carbon::parse($request->date_time)->format('Y-m-d H:i:s')
-        ]);
+        if ($request->expense_type == 'other') {
+            $expense = Expense::create([
+                'amount' => $request->amount,
+                'expense_type' => $request->expense_type,
+                'purpose' => $request->purpose,
+                'expense_by' => $request->expense_by,
+                'date_time' => Carbon::parse($request->date_time)->format('Y-m-d H:i:s')
+            ]);
+        }
+        if ($request->expense_type == 'boost') {
+            $expense = Expense::create([
+                'amount' => $request->amount,
+                'expense_type' => $request->expense_type,
+                'product_id' => $request->get('product_id'),
+                'expense_by' => $request->expense_by,
+                'date_time' => Carbon::parse($request->date_time)->format('Y-m-d H:i:s')
+            ]);
+        }
+       
         session()->flash('type', 'success');
         session()->flash('message', 'Expense has been added successfully.');
         return redirect()->route('expenses.index');
@@ -69,8 +84,9 @@ class ExpenseController extends Controller
      */
     public function edit($id)
     {
+        $products = Product::all();
         $expense = Expense::findOrFail($id);
-        return view('backend.expenses.edit', compact('expense'));
+        return view('backend.expenses.edit', compact('expense', 'products'));
     }
 
     /**
@@ -85,7 +101,9 @@ class ExpenseController extends Controller
         $expense = Expense::findOrFail($id);
         $expense->update([
             'amount' => $request->amount,
+            // 'expense_type' => $request->expense_type,
             'purpose' => $request->purpose,
+            'product_id' => $request->get('product_id'),
             'expense_by' => $request->expense_by,
             'date_time' => Carbon::parse($request->date_time)->format('Y-m-d H:i:s')
         ]);
@@ -102,6 +120,11 @@ class ExpenseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $expense = Expense::find($id);
+        $expense->delete();
+
+        session()->flash('type', 'success');
+        session()->flash('message', 'Expense has been deleted successfully.');
+        return redirect()->route('expenses.index');
     }
 }
