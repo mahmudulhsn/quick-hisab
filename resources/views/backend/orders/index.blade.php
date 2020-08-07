@@ -1,5 +1,9 @@
 @extends('backend.layouts.app')
 
+@section('title')
+    Quick Mart BD | Order List
+@endsection
+
 @section('extra-css')
 <!-- DataTables -->
 <link rel="stylesheet" href="{{ asset('/') }}back/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -81,10 +85,11 @@
                   <thead>
                   <tr>
                     <th>SL</th>
-                    <th>Customer Name</th>
-                    <th>Customer Phone</th>
-                    <th>Customer Email</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
                     <th>Ordered Product</th>
+                    <th>Total</th>
                     <th>Date</th>
                     <th>Action</th>
                   </tr>
@@ -110,6 +115,7 @@
                         $bracket = ["[", "]", ]
                     @endphp
                     <td>{{ str_replace($bracket, "", json_encode($prod)) }}</td>
+                    <td>{{ $order->total_amount  }}</td>
                     <td>{{ Carbon\Carbon::parse($order->date_time)->format('d M, Y')  }}</td>
                     <td>
                       <a href="{{ route('orders.edit', $order->id) }}" style="padding: 0 15px 0 15px">

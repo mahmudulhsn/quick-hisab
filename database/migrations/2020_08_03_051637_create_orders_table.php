@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->string('customer_phone_no');
             $table->json('product');
             $table->decimal('discount', 8, 2);
+            $table->decimal('sub_total_amount', 8, 2);
             $table->decimal('total_amount', 8, 2);
             $table->timestamp('date_time');
             $table->timestamps();

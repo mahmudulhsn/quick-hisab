@@ -1,5 +1,9 @@
 @extends('backend.layouts.app')
 
+@section('title')
+    Quick Mart BD | Add new Expense
+@endsection
+
 @section('extra-js')
 <script type="text/javascript">
   $(function () {

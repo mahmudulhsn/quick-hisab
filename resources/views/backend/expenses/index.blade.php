@@ -1,5 +1,9 @@
 @extends('backend.layouts.app')
 
+@section('title')
+    Quick Mart BD | Expense List
+@endsection
+
 @section('extra-css')
 <!-- DataTables -->
 <link rel="stylesheet" href="{{ asset('/') }}back/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">

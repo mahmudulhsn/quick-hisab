@@ -1,5 +1,9 @@
 @extends('backend.layouts.app')
 
+@section('title')
+    Quick Mart BD | Dashboard
+@endsection
+
 @section('main-content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->

@@ -45,11 +45,11 @@ class OrderController extends Controller
     public function store(OrderRequest $request)
     {
         DB::transaction(function () use($request) {
-            $total_amount = 0;
+            $sub_total_amount = 0;
             $orderedProduct = $request->get('product');
             for ($i=0; $i < count($orderedProduct['product_id']); $i++) {
                 $product = Product::find($orderedProduct['product_id'][$i]);
-                $total_amount = $total_amount + $orderedProduct['total'][$i];
+                $sub_total_amount = $sub_total_amount + $orderedProduct['total'][$i];
                 $stock = Stock::where('product_id', $orderedProduct['product_id'][$i])->latest()->first();
                 $product->stocks()->create([
                     'product_id' => $orderedProduct['product_id'][$i],
@@ -67,8 +67,9 @@ class OrderController extends Controller
                 'customer_email' => $request->customer_email,
                 'customer_phone_no' => $request->customer_phone_no,
                 'product' => $request->get('product'),
+                'sub_total_amount' => $sub_total_amount,
                 'discount' => $request->discount,
-                'total_amount' => $total_amount,
+                'total_amount' => $sub_total_amount - $request->discount,
                 'date_time' => Carbon::parse($request->date_time)->format('Y-m-d H:i:s')
             ]);
 

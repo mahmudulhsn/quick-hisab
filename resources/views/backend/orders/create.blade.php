@@ -1,5 +1,9 @@
 @extends('backend.layouts.app')
 
+@section('title')
+    Quick Mart BD | Place an Order
+@endsection
+
 @section('extra-css')
       <!-- Select2 -->
       <link rel="stylesheet" href="{{ asset('/') }}back/plugins/select2/css/select2.min.css">
