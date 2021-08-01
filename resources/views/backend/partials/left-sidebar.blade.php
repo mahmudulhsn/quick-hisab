@@ -32,9 +32,9 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-         
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+
+          <li class="nav-item has-treeview {{ Route::is('products.*') || Route::is('stocks.*') ? 'menu-open' : ''}}">
+            <a href="#" class="nav-link {{ Route::is('products.*') || Route::is('stocks.*') ? 'active' : ''}}">
               <i class="nav-icon fa fa-product-hunt"></i>
               <p>
                 Product Management
@@ -43,19 +43,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('products.create') }}" class="nav-link">
+                <a href="{{ route('products.create') }}" class="nav-link {{ Route::is('products.create') ? 'active' : ''}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add Product</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('products.index') }}" class="nav-link">
+                <a href="{{ route('products.index') }}" class="nav-link {{ Route::is('products.index') ? 'active' : ''}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Products</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('stocks.create') }}" class="nav-link">
+                <a href="{{ route('stocks.create') }}" class="nav-link {{ Route::is('stocks.create') ? 'active' : ''}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Stocks</p>
                 </a>
@@ -63,8 +63,8 @@
             </ul>
           </li>
 
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <li class="nav-item has-treeview {{ Route::is('orders.*') ? 'menu-open' : ''}}">
+            <a href="#" class="nav-link {{ Route::is('orders.*') ? 'active' : ''}}">
               <i class="nav-icon fa fa-first-order"></i>
               <p>
                 Order Management
@@ -73,13 +73,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('orders.create') }}" class="nav-link">
+                <a href="{{ route('orders.create') }}" class="nav-link {{ Route::is('orders.create') ? 'active' : ''}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Place an Order</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('orders.index') }}" class="nav-link">
+                <a href="{{ route('orders.index') }}" class="nav-link {{ Route::is('orders.index') ? 'active' : ''}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Orders</p>
                 </a>
@@ -87,8 +87,8 @@
             </ul>
           </li>
 
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <li class="nav-item has-treeview {{ Route::is('expenses.*') ? 'menu-open' : ''}}">
+            <a href="#" class="nav-link {{ Route::is('expenses.*') ? 'active' : ''}}">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Expense
@@ -97,13 +97,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('expenses.create') }}" class="nav-link">
+                <a href="{{ route('expenses.create') }}" class="nav-link {{ Route::is('expenses.create') ? 'active' : ''}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add Expense</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('expenses.index') }}" class="nav-link">
+                <a href="{{ route('expenses.index') }}" class="nav-link {{ Route::is('expenses.index') ? 'active' : ''}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Expenses</p>
                 </a>
