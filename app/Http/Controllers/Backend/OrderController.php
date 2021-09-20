@@ -62,19 +62,19 @@ class OrderController extends Controller
                 ]);
             }
 
-            $order = Order::create([
+            Order::create([
                 'customer_name' => $request->customer_name,
-                'customer_email' => $request->customer_email,
+                'address' => $request->address,
                 'customer_phone_no' => $request->customer_phone_no,
                 'product' => $request->get('product'),
                 'sub_total_amount' => $sub_total_amount,
                 'discount' => $request->discount,
-                'total_amount' => $sub_total_amount - $request->discount,
+                'total_amount' => $sub_total_amount - ($request->discount / 100) * $sub_total_amount,
                 'date_time' => Carbon::parse($request->date_time)->format('Y-m-d H:i:s')
             ]);
 
 
-            
+
         });
         session()->flash('type', 'success');
         session()->flash('message', 'Order has been placed successfully.');

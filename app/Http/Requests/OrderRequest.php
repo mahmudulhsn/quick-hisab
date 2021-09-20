@@ -25,7 +25,7 @@ class OrderRequest extends FormRequest
     {
         return [
             'customer_name' => 'required',
-            'customer_email' => 'required',
+            'address' => 'required',
             'customer_phone_no' => 'required',
             'discount' => 'required',
             'date_time' => 'required',

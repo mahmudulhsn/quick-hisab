@@ -58,18 +58,18 @@
       var addButton = $('.add_button'); //Add button selector
       var wrapper = $('.field_wrapper'); //Input field wrapper
 
-      var fieldHTML = '<tr><td><select class="form-control select2" style="width: 100%;" name="product[product_id][]" required> @foreach ($products as $product) <option value="{{ $product->id }}">{{ $product->name }}</option>@endforeach </select></td><td><input type="text" class="form-control" placeholder="Quantity" name="product[qty][]" required></td><td><input type="text" class="form-control" placeholder="Total Amount"  name="product[total][]" required></td><td> <a href="javascript:void(0);" class="remove_button" title="Add field"><i class="fa fa-minus-circle" aria-hidden="true" style="font-size: 30px; color: red;"></i></a></td></tr>'; //New input field html 
+      var fieldHTML = '<tr><td><select class="form-control select2" style="width: 100%;" name="product[product_id][]" required> @foreach ($products as $product) <option value="{{ $product->id }}">{{ $product->name }}</option>@endforeach </select></td><td><input type="text" class="form-control" placeholder="Quantity" name="product[qty][]" required></td><td><input type="text" class="form-control" placeholder="Total selling amount for this product"  name="product[total][]" required></td><td> <a href="javascript:void(0);" class="remove_button" title="Add field"><i class="fa fa-minus-circle" aria-hidden="true" style="font-size: 30px; color: red;"></i></a></td></tr>'; //New input field html
       var x = 1; //Initial field counter is 1
-      
+
       //Once add button is clicked
       $(addButton).click(function(){
           //Check maximum number of input fields
-          if(x < maxField){ 
+          if(x < maxField){
               x++; //Increment field counter
               $(wrapper).append(fieldHTML); //Add field html
           }
       });
-      
+
       //Once remove button is clicked
       $(wrapper).on('click', '.remove_button', function(e){
           e.preventDefault();
@@ -118,14 +118,14 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="customerName">Customer Name</label>
-                    <input type="text" class="form-control {{ $errors->has('customer_name') ? 'border border-danger' : '' }}" id="customerName" placeholder="Product Name" name="customer_name" value="{{ old('customer_name')}}">
+                    <input type="text" class="form-control {{ $errors->has('customer_name') ? 'border border-danger' : '' }}" id="customerName" placeholder="Customer Name" name="customer_name" value="{{ old('customer_name')}}">
                     <small class="help-block text text-danger" data-bv-validator="notEmpty" data-bv-for="txtName" data-bv-result="INVALID" style="">{{ $errors->has('customer_name') ? $errors->first('customer_name') : '' }}</small>
                   </div>
 
                   <div class="form-group">
-                    <label for="customerEmail">Cusotomer Email</label>
-                    <input type="text" class="form-control {{ $errors->has('customerEmail') ? 'border border-danger' : '' }}" id="customer_email" placeholder="Cusotomer Email" name="customer_email"  value="{{ old('customer_email')}}">
-                    <small class="help-block text text-danger" data-bv-validator="notEmpty" data-bv-for="txtName" data-bv-result="INVALID" style="">{{ $errors->has('customer_email') ? $errors->first('customer_email') : '' }}</small>
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control {{ $errors->has('address') ? 'border border-danger' : '' }}" id="address" placeholder="Customer Address" name="address"  value="{{ old('address')}}">
+                    <small class="help-block text text-danger" data-bv-validator="notEmpty" data-bv-for="txtName" data-bv-result="INVALID" style="">{{ $errors->has('address') ? $errors->first('address') : '' }}</small>
                   </div>
 
                   <div class="form-group">
@@ -135,8 +135,8 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="discount">Discount</label>
-                    <input type="number" class="form-control {{ $errors->has('discount') ? 'border border-danger' : '' }}" id="discount" placeholder="Customer Phone Number" name="discount"  value="0" >
+                    <label for="discount">Discount (%)</label>
+                    <input type="number" class="form-control {{ $errors->has('discount') ? 'border border-danger' : '' }}" id="discount" placeholder="0.00" name="discount"  value="0" >
                     <small class="help-block text text-danger" data-bv-validator="notEmpty" data-bv-for="txtName" data-bv-result="INVALID" style="">{{ $errors->has('discount') ? $errors->first('discount') : '' }}</small>
                   </div>
 
@@ -159,7 +159,7 @@
                       <tr>
                         <th>Product Name</th>
                         <th>Quantity</th>
-                        <th>Total Amount</th>
+                        <th>Total selling amount for this product</th>
                         <th></th>
                       </tr>
                       <tr>
@@ -171,7 +171,7 @@
                         </select>
                       </td>
                         <td><input type="text" class="form-control" placeholder="Quantity" name="product[qty][]" required></td>
-                        <td><input type="text" class="form-control" placeholder="Total Amount" name="product[total][]" required></td>
+                        <td><input type="text" class="form-control" placeholder="Total selling amount for this product" name="product[total][]" required></td>
                         <td> <a href="javascript:void(0);" class="add_button" title="Add field"><i class="fa fa-plus-circle" aria-hidden="true" style="font-size: 30px; color: green;"></i></a></td>
                       </tr>
                     </table>

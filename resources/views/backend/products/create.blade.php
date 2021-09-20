@@ -59,7 +59,7 @@
                     <small class="help-block text text-danger" data-bv-validator="notEmpty" data-bv-for="txtName" data-bv-result="INVALID" style="">{{ $errors->has('quantity') ? $errors->first('quantity') : '' }}</small>
                   </div>
                   <div class="form-group">
-                    <label for="productnAmount">Total Amount</label>
+                    <label for="productnAmount">Total buying amount for this product</label>
                     <input type="text" class="form-control {{ $errors->has('total_amount') ? 'border border-danger' : '' }}" id="productnAmount" placeholder="Total Amount" name="total_amount"  value="{{ old('total_amount')}}" >
                     <small class="help-block text text-danger" data-bv-validator="notEmpty" data-bv-for="txtName" data-bv-result="INVALID" style="">{{ $errors->has('total_amount') ? $errors->first('total_amount') : '' }}</small>
                   </div>

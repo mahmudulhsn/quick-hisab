@@ -89,11 +89,11 @@
                     <th>SL</th>
                     <th>Name</th>
                     <th>Phone</th>
-                    <th>Email</th>
+                    <th>Address</th>
                     <th>Ordered Product</th>
                     <th>Total</th>
                     <th>Date</th>
-                    <th>Action</th>
+                    {{-- <th>Action</th> --}}
                   </tr>
                   </thead>
                   <tbody>
@@ -102,7 +102,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $order->customer_name }}</td>
                     <td>{{ $order->customer_phone_no }}</td>
-                    <td>{{ $order->customer_email }}</td>
+                    <td>{{ $order->address }}</td>
                     @php
                         $prod = [];
                     @endphp
@@ -119,12 +119,12 @@
                     <td>{{ str_replace($bracket, "", json_encode($prod)) }}</td>
                     <td>{{ $order->total_amount  }}</td>
                     <td>{{ Carbon\Carbon::parse($order->date_time)->format('d M, Y')  }}</td>
-                    <td>
+                    {{-- <td>
                       <a href="{{ route('orders.edit', $order->id) }}" style="padding: 0 15px 0 15px">
                         <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 22px;color: green;"></i>
                       </a>
 
-                      <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$order->id}})" 
+                      <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$order->id}})"
                         data-target="#DeleteModal" style="padding: 0 15px 0 15px;"><i class="fa fa-trash-o" style="font-size: 22px;color: red;"></i>
                       </a>
 
@@ -152,7 +152,7 @@
                             </form>
                           </div>
                       </div>
-                    </td>
+                    </td> --}}
                   </tr>
                 @endforeach
                 </table>
